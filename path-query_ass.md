@@ -1,3 +1,4 @@
+``` python
 from enum import Enum
 from fastapi import FastAPI, Query, HTTPException, Path
 from typing import Optional, Tuple
@@ -59,10 +60,12 @@ def get_color(color_name: ColorName):
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
     return {"item_id": item_id}
+```
+
 
 ## N0. 1 Write a FastAPI route that accepts a path parameter for user identification
 ##(user_id) and returns the user's profile information
-
+```python
 users = {
     1: {"user_id": 1, "name": "Monk", "age": 27, "email": "monk@gmail.com"},
     2: {"user_id": 2, "name": "Amara", "age": 27, "email": "amara@yahoo.com"},
@@ -76,9 +79,11 @@ def get_user_profile(user_id: int):
         return user
     else:
         return {"message": "User not found"}
-
+```
 ## N0. 2 Implement error handling for the case when the user_id path parameter is
 ##missing.
+
+```python
 users = {
     1: {"user_id": 1, "name": "Monk", "age": 27, "email": "monk@gmail.com"},
     2: {"user_id": 2, "name": "Amara", "age": 27, "email": "amara@yahoo.com"},
@@ -93,10 +98,12 @@ def get_user_profile(user_id: int):
         raise HTTPException(status_code=404, detail="User cannot be found")
     
     return users[user_id]
+```
 
 ##Create a FastAPI route that accepts query parameters for filtering a list of
 ##products by category and price range.
 
+```python
 products = [
     {"id": 1, "name": "Product A", "category": "electronics", "price": 5000},
     {"id": 2, "name": "Product B", "category": "clothing", "price": 75},
@@ -119,9 +126,13 @@ def get_products(category: Optional[str] = None, price: Optional[float] = None):
         filtered_products = [product for product in filtered_products if product["price"] >= price]
   
     return filtered_products
+```
 
-
+#  Implement default values for the query parameters category defaulting to 'all'
+# and price_range defaulting to a specific range.
 # Dummy product data
+
+```python
 products = [
      {"id": 1, "name": "Product A", "category": "electronics", "price": 5000},
     {"id": 2, "name": "Product B", "category": "clothing", "price": 75},
@@ -130,8 +141,6 @@ products = [
     {"id": 5, "name": "Product E", "category": "Alcohol", "price": 15}
 ]
 
-#  Implement default values for the query parameters category defaulting to 'all'
-# and price_range defaulting to a specific range.
 DEFAULT_PRICE_RANGE: Tuple[float, float] = (0, 25000)
 
 @app.get("/products/")
@@ -147,12 +156,13 @@ def get_products(category: Optional[str] = 'all', price_range: Tuple[float, floa
     filtered_products = [product for product in filtered_products if min_price <= product["price"] <= max_price]
     
     return filtered_products
-
+```
 
 # Write a FastAPI route that accepts a path parameter for city (city_id) and query
 #parameters for filtering restaurants by cuisine type (cuisine) and rating (min_rating). and #Ensure that the city ID is a path parameter while cuisine type and minimum rating
 #are query parameters.
 
+```python
 restaurants = [
     {"id": 1, "name": "Kilimanjaroo", "city_id": 1, "cuisine": "Italian", "rating": 4.5},
     {"id": 2, "name": "Crunchies", "city_id": 2, "cuisine": "Mexican", "rating": 4.2},
@@ -173,10 +183,12 @@ def get_restaurants(city_id: int, cuisine: Optional[str] = None, min_rating: Opt
         filtered_restaurants = [restaurant for restaurant in filtered_restaurants if restaurant["rating"] >= min_rating]
     
     return filtered_restaurants
+```
 
 #Modify an existing FastAPI route that accepts a path parameter for user_id to
 #ensure that user_id is an integer and greater than zero.
 
+```python
 users = {
     1: {"user_id": 1, "name": "Monk", "age": 27, "email": "monk@gmail.com"},
     2: {"user_id": 2, "name": "Amara", "age": 27, "email": "amara@yahoo.com"},
@@ -190,9 +202,11 @@ def get_user_profile(user_id: int = Path(..., title="User ID", gt=0)):
         return user
     else:
         return {"message": "User not found"}
+```
+
 ##Add validation to a query parameter start_date to ensure it is a valid date format.
 
-
+```python
 
 def is_valid_date(date_str: str) -> bool:
     try:
@@ -206,8 +220,9 @@ async def read_items(start_date: str = Query(..., title="Start Date", descriptio
     if not is_valid_date(start_date):
         raise HTTPException(status_code=422, detail="Invalid date format. Date format must be YYYY-MM-DD.")
     
-    # Continue processing with valid start_date
+   
     return {"start_date": start_date}
+```
 
 #Analyze a given FastAPI application and identify instances where using path
 #parameters would be more appropriate than query parameters, and vice versa
