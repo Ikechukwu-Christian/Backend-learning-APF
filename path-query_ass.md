@@ -63,8 +63,8 @@ async def read_item(item_id: int):
 ```
 
 
-## N0. 1 Write a FastAPI route that accepts a path parameter for user identification
-##(user_id) and returns the user's profile information
+## N0. 1 Write a FastAPI route that accepts a path parameter for user identification (user_id) and returns the user's profile information
+
 ```python
 users = {
     1: {"user_id": 1, "name": "Monk", "age": 27, "email": "monk@gmail.com"},
@@ -80,8 +80,7 @@ def get_user_profile(user_id: int):
     else:
         return {"message": "User not found"}
 ```
-## N0. 2 Implement error handling for the case when the user_id path parameter is
-##missing.
+## N0. 2 Implement error handling for the case when the user_id path parameter is missing.
 
 ```python
 users = {
@@ -100,8 +99,7 @@ def get_user_profile(user_id: int):
     return users[user_id]
 ```
 
-##Create a FastAPI route that accepts query parameters for filtering a list of
-##products by category and price range.
+##Create a FastAPI route that accepts query parameters for filtering a list of products by category and price range.
 
 ```python
 products = [
@@ -128,8 +126,8 @@ def get_products(category: Optional[str] = None, price: Optional[float] = None):
     return filtered_products
 ```
 
-#  Implement default values for the query parameters category defaulting to 'all'
-# and price_range defaulting to a specific range.
+#  Implement default values for the query parameters category defaulting to 'all' and price_range defaulting to a specific range.
+
 # Dummy product data
 
 ```python
@@ -158,9 +156,7 @@ def get_products(category: Optional[str] = 'all', price_range: Tuple[float, floa
     return filtered_products
 ```
 
-# Write a FastAPI route that accepts a path parameter for city (city_id) and query
-#parameters for filtering restaurants by cuisine type (cuisine) and rating (min_rating). and #Ensure that the city ID is a path parameter while cuisine type and minimum rating
-#are query parameters.
+# Write a FastAPI route that accepts a path parameter for city (city_id) and query parameters for filtering restaurants by cuisine type (cuisine) and rating (min_rating). and #Ensure that the city ID is a path parameter while cuisine type and minimum rating are query parameters.
 
 ```python
 restaurants = [
@@ -185,8 +181,7 @@ def get_restaurants(city_id: int, cuisine: Optional[str] = None, min_rating: Opt
     return filtered_restaurants
 ```
 
-#Modify an existing FastAPI route that accepts a path parameter for user_id to
-#ensure that user_id is an integer and greater than zero.
+#Modify an existing FastAPI route that accepts a path parameter for user_id to ensure that user_id is an integer and greater than zero.
 
 ```python
 users = {
